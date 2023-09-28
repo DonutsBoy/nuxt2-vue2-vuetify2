@@ -1,1 +1,0 @@
-# nuxt2-vue2-vuetify2
