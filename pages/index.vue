@@ -65,6 +65,7 @@
                 <v-card-actions>
                     <v-spacer />
                     <v-btn color="primary" nuxt to="/inspire"> Continue2 {{ this.isOpen }}</v-btn>
+                    <v-btn color="primary" nuxt @click="excelDown1"> onclick</v-btn>
                 </v-card-actions>
             </v-card>
         </v-col>
@@ -72,15 +73,35 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: "IndexPage",
+    mounted() {
+        // 모든 화면이 렌더링된 후 실행합니다.
+        this.$nextTick(function () {
+            console.log("#### : ", process.env.TEST);
+        });
+    },
     data() {
         return {
             isOpen: true,
         };
     },
-    methods() {
-        alert("33");
+    methods: {
+        excelDown1() {
+            var param = {};
+            axios
+                // .get("https://jsonplaceholder.typicode.com/users", {
+                .get("/api/test1", {
+                    params: param,
+                })
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
 };
 </script>

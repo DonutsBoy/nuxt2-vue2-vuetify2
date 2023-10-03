@@ -36,9 +36,7 @@
             </v-btn>
         </v-app-bar>
         <v-main>
-            <v-container>
-                <Nuxt />
-            </v-container>
+            <v-container> 시작 <Nuxt /> 종료 {{ $route.name }} 페이지 </v-container>
         </v-main>
         <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
             <v-list>
