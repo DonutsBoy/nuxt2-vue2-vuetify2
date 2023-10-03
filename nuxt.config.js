@@ -3,6 +3,10 @@ import colors from "vuetify/es5/util/colors";
 export default {
     env: {
         TEST: process.env.TEST || "기본값!",
+        MYSQL_HOST: process.env.MYSQL_HOST || "기본값!",
+        MYSQL_DATABASE: process.env.MYSQL_DATABASE || "기본값!",
+        MYSQL_USER: process.env.MYSQL_USER || "기본값!",
+        MYSQL_PASSWORD: process.env.MYSQL_PASSWORD || "기본값!",
     },
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {

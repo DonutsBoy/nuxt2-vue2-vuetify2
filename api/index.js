@@ -66,7 +66,7 @@ app.get("/", async function (req, res) {
     console.log("#### ", process.env.TEST);
     // res.send("API root");
     // res.send({ id: "test" });
-    res.send(result);
+    res.send(result[0]);
 });
 
 app.get("/test1", function (req, res) {

@@ -92,7 +92,7 @@ export default {
             var param = {};
             axios
                 // .get("https://jsonplaceholder.typicode.com/users", {
-                .get("/api/test1", {
+                .get("/api/", {
                     params: param,
                 })
                 .then((response) => {
