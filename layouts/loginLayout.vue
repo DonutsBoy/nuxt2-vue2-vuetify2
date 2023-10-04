@@ -1,5 +1,3 @@
 <template>
-    <v-content>
-        <nuxt />
-    </v-content>
+    <v-content> 3<nuxt /> </v-content>
 </template>

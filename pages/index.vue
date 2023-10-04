@@ -66,6 +66,7 @@
                     <v-spacer />
                     <v-btn color="primary" nuxt to="/inspire"> Continue2 {{ this.isOpen }}</v-btn>
                     <v-btn color="primary" nuxt @click="excelDown1"> onclick</v-btn>
+                    <NuxtLink to="/login">Go to login</NuxtLink>
                 </v-card-actions>
             </v-card>
         </v-col>
@@ -73,6 +74,9 @@
 </template>
 
 <script>
+//아래 패키지는 프론트에서 가져오기 하면 에러난다 백엔드에서만 사용가능하다.
+// import mysql from "serverless-mysql";
+
 import axios from "axios";
 export default {
     name: "IndexPage",
@@ -92,7 +96,7 @@ export default {
             var param = {};
             axios
                 // .get("https://jsonplaceholder.typicode.com/users", {
-                .get("/api/", {
+                .get("/api", {
                     params: param,
                 })
                 .then((response) => {
