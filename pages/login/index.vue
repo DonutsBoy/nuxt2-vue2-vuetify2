@@ -1,9 +1,9 @@
 <template>
     <v-app id="inspire">
-        <v-content>
+        <v-main>
             <v-container fluid fill-height>
                 <v-layout align-center justify-center>
-                    <v-flex xs12 sm6 md4>
+                    <v-flex xs2 sm6 md3>
                         <v-card class="elevation-12">
                             <v-form @submit.prevent>
                                 <v-toolbar dark color="primary">
@@ -12,7 +12,7 @@
                                 </v-toolbar>
                                 <v-card-text>
                                     <v-text-field
-                                        prepend-icon="a"
+                                        prepend-icon="ID"
                                         id="id"
                                         name="id"
                                         label="id11"
@@ -20,7 +20,7 @@
                                         v-model="frmId"
                                     ></v-text-field>
                                     <v-text-field
-                                        prepend-icon="b"
+                                        prepend-icon="PW"
                                         id="pw"
                                         name="pw"
                                         label="pw11"
@@ -40,7 +40,7 @@
                     </v-flex>
                 </v-layout>
             </v-container>
-        </v-content>
+        </v-main>
     </v-app>
 </template>
 
