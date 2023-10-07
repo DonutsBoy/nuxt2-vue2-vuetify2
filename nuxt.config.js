@@ -1,5 +1,8 @@
 import colors from "vuetify/es5/util/colors";
 
+// import bodyParser from "body-parser";
+import session from "express-session";
+
 export default {
     env: {
         TEST: process.env.TEST || "기본값!",
@@ -45,8 +48,22 @@ export default {
     modules: [
         // https://go.nuxtjs.dev/axios
         "@nuxtjs/axios",
+        "@nuxtjs/pwa", //Nuxt에서 기본적인 PWA (구글에서 밀고 있는 웹기술로 progress web app)를 지원하는 패키지인 @nuxtjs/pwa를 추가
     ],
+    /*
+     ** Nuxt.js middleware js router
+     */
+    router: {
+        middleware: "auth",
+    },
     serverMiddleware: [
+        // express-session 사용
+        session({
+            secret: "super-secret-key",
+            resave: false,
+            saveUninitialized: false,
+            cookie: { maxAge: 60000 },
+        }),
         // <project root>/api/index.js 모듈을 미들웨어로 추가
         // "~/api/index.js",
 
