@@ -57,17 +57,17 @@ export default {
         middleware: "auth",
     },
     serverMiddleware: [
-        // express-session 사용
+        // express프레임워크에서 세션사용하기 위해 express-session 패키지 사용
         session({
             secret: "super-secret-key",
             resave: false,
             saveUninitialized: false,
             cookie: { maxAge: 60000 },
         }),
+
         // <project root>/api/index.js 모듈을 미들웨어로 추가
         // "~/api/index.js",
-
-        // /test 로 시작하는 모든 요청은 ~/api/index.js 에서 처리해주겠다는 것이다.
+        // /api 로 시작하는 모든 요청주소는 ~/api/index.js 에서 처리해주겠다는 것이다.
         { path: "/api", handler: "~/api/index.js" },
     ],
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
