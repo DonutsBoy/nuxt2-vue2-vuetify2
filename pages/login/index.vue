@@ -29,7 +29,7 @@
                                     ></v-text-field>
                                 </v-card-text>
 
-                                <p v-if="returnMsg" class="error">{ { returnMsg } }</p>
+                                <p v-if="returnMsg" class="error">{{ returnMsg }}</p>
 
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
@@ -57,16 +57,20 @@ export default {
     },
     methods: {
         async login() {
-            // try {
-            //     await this.$store
-            //         .dispatch("login", {
-            //             id: this.frmId,
-            //             pw: this.frmPw,
-            //         })
-            //         .then(() => this.redirect());
-            // } catch (e) {
-            //     this.returnMsg = e.message;
-            // }
+            // console.log(this.$store);
+            try {
+                console.log("22222");
+                await this.$store.dispatch("login", {
+                    id: this.frmId,
+                    pw: this.frmPw,
+                });
+                // .then(() => this.redirect());
+                // 위의 .then() 이용해도 아래와 같은 역할이다. 단 에러가 나면 .then() 은 실행안된다.
+                this.redirect(); //라우터이동
+                console.log("333333");
+            } catch (e) {
+                this.returnMsg = e.message;
+            }
         },
         redirect() {
             this.$router.push("/");

@@ -75,14 +75,14 @@ export default {
                 },
                 {
                     icon: "mdi-chart-bubble",
-                    title: "Inspire2",
+                    title: "logout",
                     to: "/system/inspire2",
                 },
             ],
             miniVariant: false,
             right: true,
             rightDrawer: false,
-            title: "Vuetify.js",
+            title: "Vuetify.js 타이틀",
         };
     },
 };

@@ -84,6 +84,18 @@ export default {
         // 모든 화면이 렌더링된 후 실행합니다.
         this.$nextTick(function () {
             console.log("#### : ", process.env.TEST);
+            var param = {};
+            axios
+                // .get("https://jsonplaceholder.typicode.com/users", {
+                .get("/api", {
+                    params: param,
+                })
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         });
     },
     data() {
