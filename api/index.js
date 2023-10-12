@@ -19,6 +19,8 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get("/inspire", async function (req, res) {
+    console.log("req.session.id : ", req.session.id); // uCOWnTaxlheEl-8zBQpFh-cmDZ8qMc9D 예를들어 이런값이 출력된다. 세션아이디 같다.
+    console.log("req.session.authUser : ", req.session.authUser);
     res.send("API root");
 });
 
@@ -79,6 +81,10 @@ app.get("/", async function (req, res) {
     console.log("#### : > ", process.env.TEST);
     console.log("req.session.id : ", req.session.id); // uCOWnTaxlheEl-8zBQpFh-cmDZ8qMc9D 예를들어 이런값이 출력된다. 세션아이디 같다.
     console.log("req.session.authUser : ", req.session.authUser);
+    if (req.session.authUser == undefined) {
+        return res.send({ CNT1: "9999" });
+    }
+    console.log("&&&&&&&&&&&&&&");
 
     // res.send("API root");
     // res.send({ id: "test" });

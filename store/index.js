@@ -45,6 +45,6 @@ export const actions = {
         commit("LOGIN", data.id);
     },
     async logout({ commit }) {
-        await axios.post("/api/logout").then(() => commit("LOGOUT"));
+        await axios.get("/api/logout").then(() => commit("LOGOUT"));
     },
 };

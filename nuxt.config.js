@@ -54,14 +54,14 @@ export default {
      ** Nuxt.js middleware js router
      */
     router: {
-        // 모든 라우팅에 대해서 stats 미들웨어가 적용됩니다.
+        //페이지이동일때만 실행된다. 라우트 이동일때는 실행안된다.
         middleware: "auth",
     },
     serverMiddleware: [
         // express프레임워크에서 세션사용하기 위해 express-session 패키지 사용
         // session middlewar
         session({
-            secret: "super-secret-key", // 이건 공대되면 안된다. 암호문을 만드는 암호키이다. // 보안을 위한 임의의 문자열
+            secret: "super-secret-key-112233", // 이건 공대되면 안된다. 암호문을 만드는 암호키이다. // 보안을 위한 임의의 문자열
             resave: false, // 세션에 변경 사항이 없어도 항상 다시 저장할지 여부
             saveUninitialized: false, // 초기화되지 않은 세션을 스토어(저장소)에 강제로 저장할 지 여부
             cookie: {
@@ -69,7 +69,9 @@ export default {
                 httpOnly: true, // true이면 클라이언트 자바스크립트에서 document.cookie로 쿠키 정보를 볼 수 없음
                 secure: false, // true이면 https 환경에서만 쿠키 정보를 주고 받도록 처리
                 // maxAge: 60000, // 쿠키가 유지되는 시간 (ms 이므로 60000 은 60초이다.) 이시간이 지나면 해당쿠키는 자동으로 삭제된다.
-                maxAge: 1000 * 60 * 5, //5분으로 설정
+                maxAge: 1000 * 60 * 2, //2분으로 설정
+                // maxAge: 0, //0 입력시 0초후에 쿠키값이 삭제되어 쿠키값이 생성안되서 계속 로그인창이 뜬다 -_-
+                // maxAge 주석처리시 개발자도구 애플리케이션탭 Cookies 트리에 Expires 에 Session 이라고 나와 웹브라우저를 모두 종료하면 그때 블라우저 세션이 끝나 쿠키도 삭제됨
             },
             //s%3AnsaDDdljJ8Vm5P32eXjOWHssgn6opi8f.z3k85haJ0bQU7jB2hH4%2BTG3NK33GJtQ3kzAr7TvQQ5Q 형태로 클라이언트 쿠키로저장되며 . 을 기준으로 앞에는 쿠키아이디 뒤에는 쿠키데이터 같다.
             //secret 로 암호화하고 secret 로 복호화 하는거 같다.

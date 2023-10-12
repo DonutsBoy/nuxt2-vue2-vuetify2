@@ -65,7 +65,7 @@ export default {
                     pw: this.frmPw,
                 });
                 // .then(() => this.redirect());
-                // 위의 .then() 이용해도 아래와 같은 역할이다. 단 에러가 나면 .then() 은 실행안된다.
+                // 위의 .then() 이용해도 아래와 같은 역할이다. 단 에러가 발생하면 위나 아래나 실행안된다.
                 this.redirect(); //라우터이동
                 console.log("333333");
             } catch (e) {

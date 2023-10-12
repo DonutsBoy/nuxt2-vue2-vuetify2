@@ -22,15 +22,11 @@ export default {
         // 모든 화면이 렌더링된 후 실행합니다.
         this.$nextTick(function () {
             console.log("#### : ", process.env.TEST);
-
-
             console.log("22222");
-                await this.$store.dispatch("logout")
-                .then(() => {
-                    alert("11");
-                    this.$router.push("/");
-                });
-
+            this.$store.dispatch("logout").then(() => {
+                // alert("11");
+                this.$router.push("/login");
+            });
         });
     },
 };

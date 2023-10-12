@@ -84,6 +84,7 @@ export default {
         // 모든 화면이 렌더링된 후 실행합니다.
         this.$nextTick(function () {
             console.log("#### : ", process.env.TEST);
+
             var param = {};
             axios
                 // .get("https://jsonplaceholder.typicode.com/users", {
@@ -91,6 +92,11 @@ export default {
                     params: param,
                 })
                 .then((response) => {
+                    //세션쿠키변수가 삭제도면 로그아웃
+                    if (response.data.CNT1 == "9999") {
+                        this.$router.push("/login");
+                    }
+                    console.log(response.data.CNT1);
                     console.log(response.data);
                 })
                 .catch((error) => {
