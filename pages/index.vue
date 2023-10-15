@@ -7,7 +7,7 @@
             </v-card>
             <v-card>
                 <v-card-title class="headline">
-                    Welcome to the Vuetify + Nuxt.js template
+                    Welcome to the Vuetify + Nuxt.js template 타임아웃값 : {{ timeout }} 초
                 </v-card-title>
                 <v-card-text>
                     <p>
@@ -67,6 +67,8 @@
                     <v-btn color="primary" nuxt to="/inspire"> Continue2 {{ this.isOpen }}</v-btn>
                     <v-btn color="primary" nuxt @click="excelDown1"> onclick</v-btn>
                     <NuxtLink to="/login">Go to login</NuxtLink>
+                    <v-btn color="primary" nuxt @click="loginKeycloak"> 키클락 로그인</v-btn>
+                    <v-btn color="primary" nuxt @click="logoutKeycloak"> 키클락 로그아웃</v-btn>
                 </v-card-actions>
             </v-card>
         </v-col>
@@ -80,11 +82,16 @@
 import axios from "axios";
 export default {
     name: "IndexPage",
+    // 인스턴스가 작성된 후 동기적으로 호출됩니다
+    create() {},
+    // 모든컴포넌트가 생성되었을때 콜백 함수 입니다.
     mounted() {
+        setInterval(this.getStatus, 5000);
+        // this.getStatus를 5초마다 반복 실행.
+
         // 모든 화면이 렌더링된 후 실행합니다.
         this.$nextTick(function () {
             console.log("#### : ", process.env.TEST);
-
             var param = {};
             axios
                 // .get("https://jsonplaceholder.typicode.com/users", {
@@ -96,6 +103,7 @@ export default {
                     if (response.data.CNT1 == "9999") {
                         this.$router.push("/login");
                     }
+                    this.timeout = response.data.timeout;
                     console.log(response.data.CNT1);
                     console.log(response.data);
                 })
@@ -107,9 +115,37 @@ export default {
     data() {
         return {
             isOpen: true,
+            timeout: 0,
         };
     },
     methods: {
+        getStatus() {
+            //그냥 백엔드 호출만 해도 세션쿠키 만료기간이 업데이트 된다.
+            console.log("#### : ", process.env.TEST);
+            var param = {};
+            axios
+                // .get("https://jsonplaceholder.typicode.com/users", {
+                .get("/api/inspire", {
+                    params: param,
+                })
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        // 화살표 함수로 methods를 정의하면, this값이 window 객체를 가리키기 때문에 data에 접근할 수 없다.
+        // 따라서 methods를 정의할 때에는 일반 함수를 쓰도록 하자.
+        loginKeycloak() {
+            this.$auth.loginWith("keycloak");
+        },
+        async logoutKeycloak() {
+            console.log("this.$auth.user :", this.$auth.user);
+            console.log("this.$auth.loggedIn :", this.$auth.loggedIn);
+            await this.$auth.logout();
+            this.$router.push("/");
+        },
         excelDown1() {
             var param = {};
             axios

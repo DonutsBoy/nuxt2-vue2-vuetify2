@@ -14,13 +14,15 @@ const express = require("express");
 // express 인스턴스 생성
 const app = express();
 
+app.set("etag", false); //이거 써줘야 304 코드가 아닌 200 코드가 뜬다.
+
 //아래를 안해주면 body 에 객체형태 {"id":id, "pw":pw} 보내준 값들이 모두 undefined 로 받게된다. req.body 하면 undefined 로 출력된다.
 //바디값을 json형식으로 출력함
 app.use(bodyParser.json());
 
 app.get("/inspire", async function (req, res) {
-    console.log("req.session.id : ", req.session.id); // uCOWnTaxlheEl-8zBQpFh-cmDZ8qMc9D 예를들어 이런값이 출력된다. 세션아이디 같다.
-    console.log("req.session.authUser : ", req.session.authUser);
+    // console.log("req.session.id : ", req.session.id); // uCOWnTaxlheEl-8zBQpFh-cmDZ8qMc9D 예를들어 이런값이 출력된다. 세션아이디 같다.
+    // console.log("req.session.authUser : ", req.session.authUser);
     res.send("API root");
 });
 
@@ -75,20 +77,30 @@ app.get("/", async function (req, res) {
 
     console.log("qry1 :", qry1);
     console.log("result :", result);
-
+    req.session;
     result[0].query = qry1; //쿼리내용
 
+    console.log("3333 : ", req.session.cookie.maxAge / 1000); // 세션쿠키 만료일시 세컨드로 출력
+    // req.session.cookie.maxAge = 1000 * 60 * 1;//이건 안되는거 같다.
+    req.session.authUser2 = "777";
+
     console.log("#### : > ", process.env.TEST);
+    console.log("req.session : ", req.session);
     console.log("req.session.id : ", req.session.id); // uCOWnTaxlheEl-8zBQpFh-cmDZ8qMc9D 예를들어 이런값이 출력된다. 세션아이디 같다.
     console.log("req.session.authUser : ", req.session.authUser);
+    req.session.views = 1;
+
     if (req.session.authUser == undefined) {
         return res.send({ CNT1: "9999" });
     }
     console.log("&&&&&&&&&&&&&&");
 
+    // 아래 해보니까 로그인페이지로 get방식 페이지 이동 안한다.
+    // delete req.session.authUser;
+    // return res.redirect("/login"); //get방식 페이지이동
+
     // res.send("API root");
-    // res.send({ id: "test" });
-    res.send(result[0]);
+    res.send({ data: result[0], timeout: Math.floor(req.session.cookie.maxAge / 1000) });
 });
 
 app.get("/test1", function (req, res) {
@@ -115,7 +127,7 @@ app.post("/login", (req, res) => {
 
 app.get("/logout", (req, res) => {
     console.log("logout!");
-    delete req.session.authUser;
+    delete req.session.authUser; //객체의 값을 삭제
     res.json({ ok: true });
 });
 
