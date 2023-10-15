@@ -86,7 +86,7 @@ export default {
     create() {},
     // 모든컴포넌트가 생성되었을때 콜백 함수 입니다.
     mounted() {
-        setInterval(this.getStatus, 5000);
+        // setInterval(this.getStatus, 5000);
         // this.getStatus를 5초마다 반복 실행.
 
         // 모든 화면이 렌더링된 후 실행합니다.

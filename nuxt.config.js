@@ -60,10 +60,10 @@ export default {
     /*
      ** Nuxt.js middleware js router
      */
-    router: {
-        //페이지이동일때만 실행된다. 라우트 이동일때는 실행안된다.
-        middleware: "auth",
-    },
+    // router: {
+    //     //페이지이동일때만 실행된다. 라우트 이동일때는 실행안된다.
+    //     middleware: "auth",
+    // },
     serverMiddleware: [
         // express프레임워크에서 세션사용하기 위해 express-session 패키지 사용
         // session middlewar
