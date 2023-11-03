@@ -83,8 +83,16 @@ import axios from "axios";
 export default {
     name: "IndexPage",
     // 인스턴스가 작성된 후 동기적으로 호출됩니다
-    create() {},
-    // 모든컴포넌트가 생성되었을때 콜백 함수 입니다.
+    // created는 렌더링은 안되었지만 Vue 인스턴스가 생성 되면서 동작하는 Hook이라고 보시면됩니다.
+    // virtual dom은 사용할 수 없지만 Data에 접근 및 초기화 하거나 이벤트를 처리하는데 자주 이용됩니다.
+    // created 훅에서는 이제 data와 events(data와 events(vm.$on, vm.$once, vm.$off, vm.$emit))가 활성화되어 접근할 수 있다.
+    // 여전히 템플릿과 가상돔은 마운트 및 렌더링되지 않은 상태이다.
+    // 크레이티드 : 발음
+    created() {},
+    // 모든 컴포넌트가 생성되었을때 콜백 함수 입니다.
+    // 컴포넌트, 템플릿, 렌더링 된 DOM 에 접근할 수 있다.
+    // 마운티드 : 모든 컴포넌트가 마운트 된후 호출됩니다.
+    // 마운트 뜻 : 탑재하다 연결하다
     mounted() {
         // setInterval(this.getStatus, 5000);
         // this.getStatus를 5초마다 반복 실행.
